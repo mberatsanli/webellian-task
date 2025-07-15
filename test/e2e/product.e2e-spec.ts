@@ -48,6 +48,7 @@ describe('ProductController (e2e)', () => {
       imports: [
         ConfigModule.forRoot({
           isGlobal: true,
+          envFilePath: '.env.test',
           load: [
             () => ({
               jwt: {

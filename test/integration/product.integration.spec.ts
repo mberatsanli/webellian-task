@@ -48,6 +48,7 @@ describe('Product Integration Tests', () => {
       imports: [
         ConfigModule.forRoot({
           isGlobal: true,
+          envFilePath: '.env.test',
           load: [
             () => ({
               jwt: {
