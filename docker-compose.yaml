@@ -1,0 +1,31 @@
+services:
+  webellian-app:
+    build:
+      context: .
+      dockerfile: docker/app.dockerfile
+    environment:
+      PORT: ${PORT:-3000}
+      NODE_ENV: ${NODE_ENV:-production}
+      DATABASE_PATH: ${DATABASE_PATH:-/data/webellian.db}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      JWT_ACCESS_TOKEN_EXPIRATION: ${JWT_ACCESS_TOKEN_EXPIRATION:-1d}
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      - database_data:/data
+
+  webellian-cli:
+    build:
+      context: .
+      dockerfile: docker/cli.dockerfile
+    environment:
+      PORT: ${PORT:-3000}
+      NODE_ENV: ${NODE_ENV:-production}
+      DATABASE_PATH: ${DATABASE_PATH:-/data/webellian.db}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      JWT_ACCESS_TOKEN_EXPIRATION: ${JWT_ACCESS_TOKEN_EXPIRATION:-1d}
+    volumes:
+      - database_data:/data
+
+volumes:
+  database_data:
